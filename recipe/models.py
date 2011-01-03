@@ -22,7 +22,7 @@ class Category(models.Model):
     original_gravity_max = models.FloatField(max_digits = 4, decimal_places = 3, null = True)
     final_gravity_min = models.FloatField(max_digits = 4, decimal_places = 3, null = True)
     final_gravity_max = models.FloatField(max_digits = 4, decimal_places = 3, null = True)
-    ibus = models.IntegerField(null = True)
+    ibu = models.IntegerField(null = True)
     color = models.IntegerField(null = True)
     alcohol = models.FloatField(max_digits = 3, decimal_places = 1, null = True)
 

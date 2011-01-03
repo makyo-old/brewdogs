@@ -10,7 +10,7 @@ class Fermentation(models.Model):
     batch_size = models.FloatField(max_digits = 5, decimal_places = 1)
 
 class Distillation(models.Model):
-    recipe = models.ForeignKey(Recipe)
+    recipe = models.ForeignKey(Fermentation)
     brewmaster = models.ForeignKey(User, related_name = 'distillations_master_of')
     participants = models.ManyToManyField(User, related_name = 'distillations_participated_in', blank = True, null = True)
     notes = models.TextField(blank = True)
