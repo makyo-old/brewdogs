@@ -116,6 +116,9 @@ def delete_recipe(request, id):
 
 @login_required
 def create_recipe(request):
+    """
+    Create a recipe
+    """
     if request.method == "GET":
         recipe = Recipe(owner = request.user)
         recipe.save()
@@ -133,6 +136,9 @@ def create_recipe(request):
 
 @login_required
 def add_ingredient(request):
+    """
+    Add an ingredient to a recipe
+    """
     if request.method = "POST":
         form = IngredientForm(request.POST)
         if form.is_valid():
@@ -143,6 +149,9 @@ def add_ingredient(request):
 
 @login_required
 def add_equipment_item(request):
+    """
+    Add an equipment item to a recipe
+    """
     if request.method == "POST":
         if request.POST.get('equipment_item_id', None) is not None and request.POST.get('recipe_id', None) is not None:
             recipe = Recipe.objects.get(id = request.POST['recipe_id'])
@@ -155,6 +164,9 @@ def add_equipment_item(request):
 
 @login_required
 def add_step(request):
+    """
+    Add a step to a recipe
+    """
     if request.method == "POST":
         form = StepForm(request.POST)
         if form.is_valid():
@@ -165,7 +177,19 @@ def add_step(request):
 
 @login_required
 def edit_ingredient(request):
-    pass
+    """
+    Edit an ingredient in a recipe
+    """
+    if request.method = "POST":
+        ingredient = Ingredient.objects.get(id = form.cleaned_data['id'])
+        if ingredient.recipe.id != form.cleaned_data['recipe_id']:
+            return _respond('failure')
+        form = IngredientForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return _respond('success')
+    else:
+        return _respond('failure')
 
 def edit_step(request):
     pass

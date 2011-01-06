@@ -23,46 +23,49 @@ class Distillation(models.Model):
     end_cut_abv = models.FloatField(max_digits = 3, decimal_places = 1, null = True)
 
 class FermentationEvent(models.Model):
-    EVENT_TYPES = (
-            (0, "Mash-in"),
-            (1, "Mash note"),
-            (2, "Mash-out"),
-            (3, "Lauter"),
-            (4, "Sparge"),
-            (5, "Boil start"),
-            (6, "Boil note"),
-            (7, "Bittering hops"),
-            (8, "Flavor hops"),
-            (9, "Aroma hops"),
-            (10, "Dry hops"),
-            (11, "Cool start"),
-            (12, "Cool note"),
-            (13, "Cool end"),
-            (14, "Yeast pitched"),
-            (15, "Fermentation start"),
-            (16, "Fermentation note"),
-            (17, "Rack to secondary"),
-            (18, "Lagering"),
-            (19, "Fermentation end"),
-            (20, "Backsweeten"),
-            (21, "Other ingredient addition"),
-            (22, "Hydrometer reading"),
-            (23, "Bottling"),
-            (24, "Bottling note"),
-            (25, "Bottle conditioning"),
-            (26, "Aging"),
-            (27, "Sampling"),
-            (28, "Last of batch consumed"),
-            (29, "General note")
-            )
+    """
+            (0, "Dough in"),
+            (1, "Mash-in"),
+            (2, "Mash note"),
+            (3, "Mash-out"),
+            (4, "Lauter"),
+            (5, "Sparge"),
+            (6, "Steep"),
+            (6, "Boil start"),
+            (7, "Boil note"),
+            (8, "Bittering hops"),
+            (9, "Flavor hops"),
+            (10, "Aroma hops"),
+            (11, "Dry hops"),
+            (12, "Cool start"),
+            (13, "Cool note"),
+            (14, "Cool end"),
+            (15, "Yeast pitched"),
+            (16, "Fermentation start"),
+            (17, "Fermentation note"),
+            (18, "Rack to secondary"),
+            (19, "Lagering"),
+            (20, "Fermentation end"),
+            (21, "Backsweeten"),
+            (22, "Other ingredient addition"),
+            (23, "Hydrometer reading"),
+            (24, "Bottling"),
+            (25, "Bottling note"),
+            (26, "Bottle conditioning"),
+            (27, "Aging"),
+            (28, "Sampling"),
+            (29, "Last of batch consumed"),
+            (30, "General note")
+    """
 
-    event_type = models.IntegerField(choices = EVENT_TYPES)
+    event = models.ForeignKey('Event')
+    fermentation = models.ForeignKey(Fermentation)
     event_datetime = models.DateTimeField(auto_now_add = True)
     owner = models.ForeignKey(User)
     notes = models.TextField(blank = True)
 
 class DistillationEvent(models.Model):
-    EVENT_TYPES = (
+    """
             (0, "Boil start"),
             (1, "Foreshots"),
             (2, "Start collecting"),
@@ -88,9 +91,19 @@ class DistillationEvent(models.Model):
             (22, "Sampling"),
             (23, "Last of batch consumed"),
             (24, "General note")
-            )
+    """
 
-    event_type = models.IntegerField(choices = EVENT_TYPES)
+    event = models.ForeignKey('Event')
+    distillation = models.ForeignKey(Distillation)
     event_datetime = models.DateTimeEvent(auto_now_add = True)
     owner = models.ForeignKey(User)
     notes = models.TextField(blank = True)
+
+class Event(models.Model):
+    TYPE_CHOICES = (
+            ("F", "Fermentation"),
+            ("D", "Distillation")
+            )
+
+    event_type = models.CharField(max_length = 1, choices = TYPE_CHOICES)
+    event_text = models.CharField(max_length = 50)

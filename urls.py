@@ -34,6 +34,8 @@ urlpatterns = patterns('',
     (r'^ajax/add_distillation_event/$', 'brewdogs.brewsession.views.add_distillation_event'),
     (r'^ajax/add_ingredient/$', 'brewdogs.recipe.views.add_ingredient'),
     (r'^ajax/add_equipment_item/$', 'brewdogs.recipe.views.add_equipment_item'),
+    (r'^ajax/add_default_equipment_item/$', 'brewdogs.usermgmt.views.add_default_equipment_item'),
+    (r'^ajax/add_total_equipment_item/$', 'brewdogs.usermgmt.views.add_total_equipment_item'),
     (r'^ajax/add_step/$', 'brewdogs.recipe.views.add_step'),
     (r'^ajax/edit_fermentation_event/$', 'brewdogs.brewsession.views.edit_fermentation_event'),
     (r'^ajax/edit_distillation_event/$', 'brewdogs.brewsession.views.edit_distillation_event'),
@@ -43,6 +45,8 @@ urlpatterns = patterns('',
     (r'^ajax/delete_distillation_event/$', 'brewdogs.brewsession.views.delete_distillation_event'),
     (r'^ajax/delete_ingredient/$', 'brewdogs.recipe.views.delete_ingredient'),
     (r'^ajax/delete_equipment_item/$', 'brewdogs.recipe.views.delete_equipment_item'),
+    (r'^ajax/delete_default_equipment_item/$', 'brewdogs.usermgmt.views.delete_default_equipment_item'),
+    (r'^ajax/delete_total_equipment_item/$', 'brewdogs.usermgmt.views.delete_total_equipment_item'),
     (r'^ajax/delete_step/$', 'brewdogs.recipe.views.delete_step'),
     (r'^ajax/add_recipe_to_docket/$', 'brewdogs.recipe.views.add_recipe_to_docket'),
     (r'^ajax/remove_recipe_from_docket/$', 'brewdogs.recipe.views.remove_recipe_from_docket'),
@@ -54,13 +58,6 @@ urlpatterns = patterns('',
     (r'^ajax/add_distillation_to_drinking/$', 'brewdogs.brewsession.views.add_distillation_to_drinking'),
     (r'^ajax/remove_fermentation_from_lists/$', 'brewdogs.brewsession.views.remove_fermentation_from_lists'),
     (r'^ajax/remove_distillation_from_lists/$', 'brewdogs.brewsession.views.remove_distillation_from_lists'),
-
-    # Example:
-    # (r'^brewdogs/', include('brewdogs.foo.urls')),
-
-    # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
-    # to INSTALLED_APPS to enable admin documentation:
-    # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
     # (r'^admin/', include(admin.site.urls)),

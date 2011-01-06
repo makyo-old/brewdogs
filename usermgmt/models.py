@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from brewdogs.brewsession.models import *
+from brewdogs.recipe.models import *
 
 class UserProfile(models.Model):
     STATUS_CHOICES = (
@@ -31,3 +32,5 @@ class UserProfile(models.Model):
     fermentations_drinking = models.ManyToManyField(Fermentation, related_name = "users_drinking")
     distillations_drinking = models.ManyToManyField(Distillation, related_name = "users_drinking")
     recipes_docket = models.ManyToManyField(Recipe, related_name = "users_planning")
+    default_equipment = models.ManyToManyField(EquipmentItem, related_name = "users_default_equipment")
+    total_equipment = models.ManyToManyfield(EquipmentItem, related_name = "users_total_equipment")
