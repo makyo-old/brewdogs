@@ -1,5 +1,6 @@
 from django.db import models
 from brewdogs.recipe.models import *
+from brewdogs.choices import *
 from django.contrib.auth.models import User
 
 class Fermentation(models.Model):
@@ -8,6 +9,10 @@ class Fermentation(models.Model):
     participants = models.ManyToManyField(User, related_name = 'fermentations_participated_in', blank = True, null = True)
     notes = models.TextField(blank = True)
     batch_size = models.FloatField(max_digits = 5, decimal_places = 1)
+    batch_size_units = models.CharField(max_length = 4, choices = VOLUME_CHOICES)
+
+    def get_absolute_url(self):
+        return "/brew/%s/" % self.id
 
 class Distillation(models.Model):
     recipe = models.ForeignKey(Fermentation)
@@ -16,11 +21,17 @@ class Distillation(models.Model):
     notes = models.TextField(blank = True)
     is_strip_run = models.BooleanField(default = False)
     keep_yield = models.FloatField(max_digits = 5, decimal_places = 2)
+    keep_yield_units = models.CharField(max_length = 4, choices = VOLUME_CHOICES)
     feints_yield = models.FloatField(max_digits = 5, decimal_places = 2, null = True)
+    feints_yield_units = models.CharField(max_length = 4, choices = VOLUME_CHOICES)
     start_cut_temp = models.FloatField(max_digits = 4, decimal_places = 1, null = True)
     start_cut_abv = models.FloatField(max_digits = 3, decimal_places = 1, null = True)
     end_cut_temp = models.FloatField(max_digits = 4, decimal_places = 1, null = True)
     end_cut_abv = models.FloatField(max_digits = 3, decimal_places = 1, null = True)
+    temp_units = models.CharField(max_length = 1, choices = TEMPERATURE_CHOICES)
+
+    def get_absolute_url(self):
+        return "/run/%s/" % self.id
 
 class FermentationEvent(models.Model):
     """
