@@ -30,6 +30,12 @@ urlpatterns = patterns('',
     (r'^comment/(?P<id>\d+)/flag/$', 'brewdogs.threadedcomment.views.flag_comment'),
     (r'^comment/(?P<id>\d+)/delete/$', 'brewdogs.threadedcomment.views.delete_comment'),
 
+    (r'^glossary/$', 'brewdogs.glossary.views.list_terms'),
+    (r'^glossary/create/$', 'brewdogs.glossary.views.create_term'),
+    (r'^glossary/(?P<term>.+)/$', 'brewdogs.glossary.views.show_term'),
+    (r'^glossary/(?P<term>.+)/edit/$', 'brewdogs.glossary.views.edit_term'),
+    (r'^glossary/(?P<term>.+)/delete/$', 'brewdogs.glossary.views.delete_term'),
+
     (r'^ajax/add_fermentation_event/$', 'brewdogs.brewsession.ajax_views.add_fermentation_event'),
     (r'^ajax/add_distillation_event/$', 'brewdogs.brewsession.ajax_views.add_distillation_event'),
     (r'^ajax/add_ingredient/$', 'brewdogs.recipe.ajax_views.add_ingredient'),
