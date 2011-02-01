@@ -55,7 +55,12 @@ def edit_distillation(request, id):
         return render_to_response("errors/403.html", context_instance = RequestContext(request, {}))
 
 def delete_fermentation(request, id):
-    pass
+    """
+    Delete a fermentation
+    """
+    fermentation = get_object_or_404(Fermentation, id = id)
+    if request.user == fermentation.brewmaster or request.user.is_staff():
+        
 
 def delete_distillation(request, id):
     pass
